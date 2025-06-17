@@ -1,26 +1,36 @@
+package com.mycompany.gestionliga;
+
 public class Partido {
-    private String eLocal;
-    private String eVisitante;
+
+    private Equipo eLocal;
+    private Equipo eVisitante;
     private int golesLocal;
     private int golesVisitante;
-    private String ganador;
+    private Equipo ganador;
 
-    public Partido() {
-    }
-
-    public Partido(String eLocal, String eVisitante, int golesLocal, int golesVisitante, String ganador) {
+    public Partido(Equipo eLocal, Equipo eVisitante, int golesLocal, int golesVisitante) {
         this.eLocal = eLocal;
         this.eVisitante = eVisitante;
         this.golesLocal = golesLocal;
         this.golesVisitante = golesVisitante;
-        this.ganador = ganador;
+        definirGanador();
     }
 
-    public String geteLocal() {
+    public void definirGanador() {
+        if (golesLocal > golesVisitante) {
+            this.ganador = eLocal;
+        } else if (golesVisitante > golesLocal) {
+            this.ganador = eVisitante;
+        } else {
+            this.ganador = null;
+        }
+    }
+
+    public Equipo geteLocal() {
         return eLocal;
     }
 
-    public String geteVisitante() {
+    public Equipo geteVisitante() {
         return eVisitante;
     }
 
@@ -32,28 +42,14 @@ public class Partido {
         return golesVisitante;
     }
 
-    public String getGanador() {
+    public Equipo getGanador() {
         return ganador;
     }
 
-    public void seteLocal(String eLocal) {
-        this.eLocal = eLocal;
-    }
-
-    public void seteVisitante(String eVisitante) {
-        this.eVisitante = eVisitante;
-    }
-
-    public void setGolesLocal(int golesLocal) {
-        this.golesLocal = golesLocal;
-    }
-
-    public void setGolesVisitante(int golesVisitante) {
-        this.golesVisitante = golesVisitante;
-    }
-
-    public void setGanador(String ganador) {
-        this.ganador = ganador;
-    }
-    
+    @Override
+    public String toString() {
+        return "Partido: " + eLocal.getNombre() + " (" + golesLocal + ") vs " +
+               eVisitante.getNombre() + " (" + golesVisitante + ") - Ganador: " +
+               (ganador != null ? ganador.getNombre() : "Empate");
+    }
 }
