@@ -1,0 +1,119 @@
+package com.mycompany.gestionliga;
+
+import java.util.List;
+import java.util.Scanner;
+
+public class Menu {
+    private Scanner scanner;
+
+    public Menu() {
+        scanner = new Scanner(System.in);
+    }
+
+    public void mostrarMenuPrincipal() {
+        System.out.println("\n=== MENÚ PRINCIPAL ===");
+        System.out.println("1. Ingresar equipos");
+        System.out.println("2. Ingresar resultados");
+        System.out.println("3. Ver tabla de posiciones");
+        System.out.println("4. Ver campeón");
+        System.out.println("5. Salir");
+        System.out.print("Elija una opción: ");
+    }
+
+    public int pedirOpcion() {
+        while (true) {
+            try {
+                String entrada = scanner.nextLine();
+                int opcion = Integer.parseInt(entrada);
+                if (opcion >= 1 && opcion <= 5) {
+                    return opcion;
+                } else {
+                    System.out.print("Opción inválida, intente otra vez: ");
+                }
+            } catch (NumberFormatException e) {
+                System.out.print("No es un número válido. Intente otra vez: ");
+            }
+        }
+    }
+
+    public String pedirNombreEquipo(int numEquipo) {
+        System.out.print("Nombre del equipo #" + numEquipo + ": ");
+        return scanner.nextLine().trim();
+    }
+
+    public DatosPartido pedirDatosPartido() {
+        System.out.print("Equipo local (o 'fin' para salir): ");
+        String local = scanner.nextLine().trim();
+        if (local.equalsIgnoreCase("fin")) {
+            return null;
+        }
+        System.out.print("Equipo visitante: ");
+        String visitante = scanner.nextLine().trim();
+
+        int golesLocal = pedirGoles("Goles del equipo local: ");
+        int golesVisitante = pedirGoles("Goles del equipo visitante: ");
+
+        return new DatosPartido(local, visitante, golesLocal, golesVisitante);
+    }
+
+    private int pedirGoles(String mensaje) {
+        while (true) {
+            System.out.print(mensaje);
+            try {
+                int goles = Integer.parseInt(scanner.nextLine());
+                if (goles >= 0) {
+                    return goles;
+                } else {
+                    System.out.println("No puede ser un número negativo. Intente de nuevo.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Debe ser un número entero. Intente de nuevo.");
+            }
+        }
+    }
+
+    public void mostrarEquipos(List<Equipo> equipos) {
+        System.out.println("\nEquipos cargados:");
+        for (Equipo e : equipos) {
+            System.out.println("- " + e.getNombre());
+        }
+    }
+
+    public void mostrarTabla(List<Equipo> equipos) {
+        System.out.println("\n=== TABLA DE POSICIONES ===");
+        System.out.printf("%-20s %-7s %-15s\n", "Equipo", "Puntos", "Diferencia de goles");
+        for (Equipo e : equipos) {
+            System.out.printf("%-20s %-7d %-15d\n", e.getNombre(), e.getPuntos(), e.getDiferenciaGoles());
+        }
+    }
+
+    public void mostrarCampeon(Equipo campeon) {
+        if (campeon != null) {
+            System.out.println("\nEl campeón es: " + campeon.getNombre());
+        } else {
+            System.out.println("\nEmpate entre equipos, no hay campeón definido.");
+        }
+    }
+
+    public void mostrarMensaje(String mensaje) {
+        System.out.println(mensaje);
+    }
+
+    public void cerrar() {
+        scanner.close();
+    }
+
+    public static class DatosPartido {
+        public String equipoLocal;
+        public String equipoVisitante;
+        public int golesLocal;
+        public int golesVisitante;
+
+        public DatosPartido(String local, String visitante, int golesL, int golesV) {
+            equipoLocal = local;
+            equipoVisitante = visitante;
+            golesLocal = golesL;
+            golesVisitante = golesV;
+        }
+    }
+}
