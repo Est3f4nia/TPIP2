@@ -1,19 +1,37 @@
+package com.mycompany.gestionliga;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Equipo {
+
     private String nombre;
     private int puntos;
     private int diferenciaGoles;
-    private String jugadores;
+    //Lista de jugadores por equipo (Agregar en SQL)
 
-    public Equipo(String nombre, int puntos, int diferenciaGoles, String jugadores) {
+    public Equipo(String nombre) {
         this.nombre = nombre;
-        this.puntos = puntos;
-        this.diferenciaGoles = diferenciaGoles;
-        this.jugadores = jugadores;
+        this.puntos = 0;
+        this.diferenciaGoles = 0;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public int getDiferenciaGoles() {
+        return diferenciaGoles;
+    }
+
+
+    public void actualizarPuntos(int puntosGanados, int golesAFavor, int golesEnContra) {
+        this.puntos += puntosGanados;
+        this.diferenciaGoles += (golesAFavor - golesEnContra);
     }
 
     public void setPuntos(int puntos) {
@@ -24,8 +42,9 @@ public class Equipo {
         this.diferenciaGoles = diferenciaGoles;
     }
 
-    public void setJugadores(String jugadores) {
-        this.jugadores = jugadores;
-    }
-    
+    @Override
+    public String toString() {
+        return "Equipo [Nombre: " + nombre + ", Puntos: " + puntos + ", Dif. Goles: " + diferenciaGoles + "]";
+    }
+}
 }
