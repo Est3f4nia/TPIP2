@@ -1,20 +1,19 @@
+package com.mycompany.gestionliga;
 
 public class Jugador {
-  
-    private String nombre; 
-    private String posicion; 
-    private boolean amonestado; 
+
+    private String nombre;
+    private String posicion;
+    private boolean amonestado;
     private boolean expulsado;
 
-    // Constructor
     public Jugador(String nombre, String posicion) {
         this.nombre = nombre;
         this.posicion = posicion;
-        this.amonestado = false; //  no amonestado
-        this.expulsado = false;  //  no expulsado
+        this.amonestado = false;
+        this.expulsado = false;
     }
 
-    // Getters
     public String getNombre() {
         return nombre;
     }
@@ -31,7 +30,6 @@ public class Jugador {
         return expulsado;
     }
 
-    // Setters (para modificar el estado de amonestación/expulsión)
     public void setAmonestado(boolean amonestado) {
         this.amonestado = amonestado;
     }
@@ -40,16 +38,15 @@ public class Jugador {
         this.expulsado = expulsado;
     }
 
-    // Método toString para facilitar la visualización del jugador
     @Override
     public String toString() {
         String estado = "";
-        if (amonestado) {
-            estado += " (Amonestado)";
-        }
-        if (expulsado) {
-            estado += " (Expulsado)";
-        }
+        if (amonestado) estado += " (Amonestado)";
+        if (expulsado) estado += " (Expulsado)";
         return "Jugador [Nombre: " + nombre + ", Posición: " + posicion + estado + "]";
     }
 }
+
+
+   
+   
