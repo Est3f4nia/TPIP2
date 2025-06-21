@@ -1,119 +1,69 @@
-package com.mycompany.gestionliga;
+package TUP.tpi.vista;
 
-import java.util.List;
 import java.util.Scanner;
+import TUP.tpi.controlador.GestionLiga;
 
 public class Menu {
-    private Scanner scanner;
+    public static void menu(){
+        Scanner sc = new Scanner(System.in);
 
-    public Menu() {
-        scanner = new Scanner(System.in);
-    }
-
-    public void mostrarMenuPrincipal() {
         System.out.println("\n=== MENÚ PRINCIPAL ===");
-        System.out.println("1. Ingresar equipos");
-        System.out.println("2. Ingresar resultados");
-        System.out.println("3. Ver tabla de posiciones");
-        System.out.println("4. Ver campeón");
-        System.out.println("5. Salir");
-        System.out.print("Elija una opción: ");
-    }
+        System.out.println("1. Cargar equipos.");
+        System.out.println("2. Cargar jugadores.");
+        //System.out.println("x. Cargar amarillas.");
+        System.out.println("3. Mostrar información de jugador.");
+        System.out.println("4. Ingresar resultados de partido.");
+        System.out.println("5. Ver tabla de posiciones.");
+        System.out.println("6. Ver campeón.");
+        System.out.println("0. Salir");
 
-    public int pedirOpcion() {
+        System.out.print("Opción: ");
+
+        int opcion;
         while (true) {
             try {
-                String entrada = scanner.nextLine();
-                int opcion = Integer.parseInt(entrada);
-                if (opcion >= 1 && opcion <= 5) {
-                    return opcion;
+                String entrada = sc.nextLine();
+                opcion = Integer.parseInt(entrada);
+                if (opcion >= 0 && opcion <= 5) {
+                    break;
                 } else {
-                    System.out.print("Opción inválida, intente otra vez: ");
+                    System.out.println("\n[!] Opción inválida.");
+                    Menu.menu();
                 }
             } catch (NumberFormatException e) {
-                System.out.print("No es un número válido. Intente otra vez: ");
+                System.out.print("\n[!] No es un número válido.");
+                Menu.menu();
             }
         }
-    }
 
-    public String pedirNombreEquipo(int numEquipo) {
-        System.out.print("Nombre del equipo #" + numEquipo + ": ");
-        return scanner.nextLine().trim();
-    }
-
-    public DatosPartido pedirDatosPartido() {
-        System.out.print("Equipo local (o 'fin' para salir): ");
-        String local = scanner.nextLine().trim();
-        if (local.equalsIgnoreCase("fin")) {
-            return null;
+        if (opcion == 1) {
+            GestionLiga.cargaEquipos();
         }
-        System.out.print("Equipo visitante: ");
-        String visitante = scanner.nextLine().trim();
-
-        int golesLocal = pedirGoles("Goles del equipo local: ");
-        int golesVisitante = pedirGoles("Goles del equipo visitante: ");
-
-        return new DatosPartido(local, visitante, golesLocal, golesVisitante);
-    }
-
-    private int pedirGoles(String mensaje) {
-        while (true) {
-            System.out.print(mensaje);
-            try {
-                int goles = Integer.parseInt(scanner.nextLine());
-                if (goles >= 0) {
-                    return goles;
-                } else {
-                    System.out.println("No puede ser un número negativo. Intente de nuevo.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Debe ser un número entero. Intente de nuevo.");
-            }
+        
+        if (opcion == 2) {
+            GestionLiga.cargaJugadores();
         }
-    }
-
-    public void mostrarEquipos(List<Equipo> equipos) {
-        System.out.println("\nEquipos cargados:");
-        for (Equipo e : equipos) {
-            System.out.println("- " + e.getNombre());
+        
+        if (opcion == 3){
+            GestionLiga.buscarJugador();
         }
-    }
-
-    public void mostrarTabla(List<Equipo> equipos) {
-        System.out.println("\n=== TABLA DE POSICIONES ===");
-        System.out.printf("%-20s %-7s %-15s\n", "Equipo", "Puntos", "Diferencia de goles");
-        for (Equipo e : equipos) {
-            System.out.printf("%-20s %-7d %-15d\n", e.getNombre(), e.getPuntos(), e.getDiferenciaGoles());
+        
+        if (opcion == 4){
+            GestionLiga.cargaResultados();
         }
-    }
-
-    public void mostrarCampeon(Equipo campeon) {
-        if (campeon != null) {
-            System.out.println("\nEl campeón es: " + campeon.getNombre());
-        } else {
-            System.out.println("\nEmpate entre equipos, no hay campeón definido.");
+        
+        if (opcion == 5){
+            GestionLiga.tablaPosiciones();
         }
-    }
-
-    public void mostrarMensaje(String mensaje) {
-        System.out.println(mensaje);
-    }
-
-    public void cerrar() {
-        scanner.close();
-    }
-
-    public static class DatosPartido {
-        public String equipoLocal;
-        public String equipoVisitante;
-        public int golesLocal;
-        public int golesVisitante;
-
-        public DatosPartido(String local, String visitante, int golesL, int golesV) {
-            equipoLocal = local;
-            equipoVisitante = visitante;
-            golesLocal = golesL;
-            golesVisitante = golesV;
+        
+        if (opcion == 6){
+            GestionLiga.campeon();
         }
+
+        if (opcion == 0){
+            System.out.println("[*] Saliendo...");
+        }
+        
     }
 }
+
