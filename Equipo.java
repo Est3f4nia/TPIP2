@@ -1,19 +1,10 @@
-package com.mycompany.gestionliga;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Equipo {
-
     private String nombre;
     private int puntos;
-    private int diferenciaGoles;
-    //Lista de jugadores por equipo (Agregar en SQL)
 
     public Equipo(String nombre) {
         this.nombre = nombre;
         this.puntos = 0;
-        this.diferenciaGoles = 0;
     }
 
     public String getNombre() {
@@ -23,7 +14,9 @@ public class Equipo {
     public int getPuntos() {
         return puntos;
     }
+}
 
+    
     public int getDiferenciaGoles() {
         return diferenciaGoles;
     }
