@@ -1,12 +1,22 @@
-public class Equipo {
-    private String nombre;
-    private int puntos;
+import java.util.ArrayList;
+import java.util.List;     
 
+public class Equipo {
+    
+    private String nombre; 
+    private int puntos; 
+    private int diferenciaGoles; 
+    private List<Jugador> jugadores; 
+
+    // Constructor
     public Equipo(String nombre) {
         this.nombre = nombre;
         this.puntos = 0;
+        this.diferenciaGoles = 0;
+        this.jugadores = new ArrayList<>();
     }
 
+    // Getters 
     public String getNombre() {
         return nombre;
     }
@@ -14,9 +24,8 @@ public class Equipo {
     public int getPuntos() {
         return puntos;
     }
-}
+    }
 
-    
     public int getDiferenciaGoles() {
         return diferenciaGoles;
     }
