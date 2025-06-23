@@ -1,3 +1,5 @@
+package TUP.tpi.modelo;
+
 public class Jugador {
     private int dni;
     private String nombre;
