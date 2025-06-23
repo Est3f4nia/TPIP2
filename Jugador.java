@@ -1,19 +1,20 @@
-package com.mycompany.gestionliga;
-
 public class Jugador {
-
+    private int dni;
     private String nombre;
     private String posicion;
-    private boolean amonestado;
-    private boolean expulsado;
+    private int idEquipo;
 
-    public Jugador(String nombre, String posicion) {
+    public Jugador(int dni, String nombre, String posicion, int idEquipo) {
+        this.dni = dni;
         this.nombre = nombre;
         this.posicion = posicion;
-        this.amonestado = false;
-        this.expulsado = false;
+        this.idEquipo = idEquipo;
     }
 
+    public int getDni() {
+        return dni;
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -21,32 +22,13 @@ public class Jugador {
     public String getPosicion() {
         return posicion;
     }
-
-    public boolean isAmonestado() {
-        return amonestado;
+    
+    public int getidEquipo() {
+        return idEquipo;
     }
 
-    public boolean isExpulsado() {
-        return expulsado;
-    }
-
-    public void setAmonestado(boolean amonestado) {
-        this.amonestado = amonestado;
-    }
-
-    public void setExpulsado(boolean expulsado) {
-        this.expulsado = expulsado;
-    }
-
-    @Override
-    public String toString() {
-        String estado = "";
-        if (amonestado) estado += " (Amonestado)";
-        if (expulsado) estado += " (Expulsado)";
-        return "Jugador [Nombre: " + nombre + ", Posición: " + posicion + estado + "]";
-    }
 }
 
 
-   
+    
    
