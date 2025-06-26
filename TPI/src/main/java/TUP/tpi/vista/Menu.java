@@ -24,7 +24,7 @@ public class Menu {
             try {
                 String entrada = sc.nextLine();
                 opcion = Integer.parseInt(entrada);
-                if (opcion >= 0 && opcion <= 5) {
+                if (opcion >= 0 && opcion <= 6) {
                     break;
                 } else {
                     System.out.println("\n[!] Opción inválida.");
